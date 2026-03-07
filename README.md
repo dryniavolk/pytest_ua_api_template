@@ -3,8 +3,7 @@
 ## Шаблон для автоматизации тестирования на python
 
 ### Шаги
-1. Склонировать проект 'git clone https://github.com/имя_пользователя/
-   pytest_ui_api_template.git'
+1. Склонировать проект 'https://github.com/dryniavolk/pytest_ua_api_template.git'
 2. Установить зависимости
 3. Запустить тесты 'pytest'
 
@@ -30,3 +29,12 @@
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
+
+### Библиотеки (!)
+- pyp install pytest
+- pip install selenium
+- pip install webdriver-manager
+- pip install requests
+- pip install _sqlalchemy_
+- pip install allure
+
