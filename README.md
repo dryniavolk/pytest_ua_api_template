@@ -1,0 +1,1 @@
+# pytest_ua_api_template
