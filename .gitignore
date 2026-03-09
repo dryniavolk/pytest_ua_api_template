@@ -27,7 +27,7 @@ ENV/
 env/
 .venv/
 
-# --- Тестирование и Покрытие (Оставляем кэш pytest, но скрываем отчеты) ---
+# --- Тестирование и Покрытие ---
 .pytest_cache/
 .coverage
 htmlcov/
@@ -56,6 +56,11 @@ allure-report/
 .env
 .envrc
 *.log
+
+# --- Тестовые артефакты и Cookies ---
+*.json
+!config/settings.json
+aviasales_cookies.json
 
 # --- ОС ---
 .DS_Store

@@ -21,11 +21,28 @@
 - ./api - хелперы для работы с API
 - ./db - хелперы для работы с БД
 
+pytest_api_ui_template/
+├── api/                          
+│   ├── aviasales_api.py          
+│   ├── cookie_manager.py         
+│   └── http_client.py            
+├── pages/                        
+│   ├── mainPage.py              
+│   └── resultPage.py             
+│
+├── test/                        
+│   ├── test_api.py               
+│   └── test_ui.py                
+├── conftest.py                   
+├── pytest.ini                     
+├── requirements.txt               
+└── README.md   
+
 ### Стек:
 - pytest
 - selenium
 - requests
-- _sqlalchemy_
+- allure
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
@@ -35,6 +52,5 @@
 - pip install selenium
 - pip install webdriver-manager
 - pip install requests
-- pip install _sqlalchemy_
 - pip install allure
 
