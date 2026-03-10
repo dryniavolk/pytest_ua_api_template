@@ -60,7 +60,7 @@ pytest_ua_api_template/
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
 - [финальная работа по ручному тестированию Aviasales](https://volkavtest.yonote.ru/share/638ff0ef-35e2-48a7-9a52-2bc0af61bbcf)
 
-### Библиотеки (!)
+### Библиотеки для установки
 - pyp install pytest
 - pip install selenium
 - pip install webdriver-manager
