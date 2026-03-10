@@ -1,42 +1,18 @@
 # pytest_ui_api_template
 
-## Шаблон для автоматизации тестирования на python
+## Автоматизированное тестирования Aviasales
 
-### Шаги
-1. Склонировать проект 'https://github.com/dryniavolk/pytest_ua_api_template.git'
-2. Установить зависимости
-# pip install -r requirements.txt
-3. Запуск тестов
-# API + UI тесты
-bash
-Все тесты
-pytest
-
-Только UI-тесты
-pytest -m ui
-
-Только API-тесты
-pytest -m api   
-
-# С генерацией Allure отчёта
-pytest tests/ -v --alluredir=allure-results
-
-allure serve allure-results
-
-или сразу .\run_tests.bat он сформирует отчёт в allure-results
 
 ### Стек:
-- pytest
-- selenium
+- Pytest
+- Selenium
 - requests
 - allure
 - config
 
-### Струткура:
-- ./test - тесты
-- ./pages - описание страниц
-- ./api - хелперы для работы с API
+### Структура проекта
 
+```
 pytest_ua_api_template/
 ├── api/
 │   ├── __init__.py
@@ -58,21 +34,60 @@ pytest_ua_api_template/
 ├── requirements.txt              # Зависимости
 ├── README.md                     # Документация
 └── allure-results/               # Результаты Allure (gitignored)
-
-### Стек:
-- pytest
-- selenium
-- requests
-- allure
+```
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
-- [финальная работа по ручному тестированию Aviasales](https://volkavtest.yonote.ru/share/638ff0ef-35e2-48a7-9a52-2bc0af61bbcf)
+- [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore)
+- Финальный проект по ручному тестированию[Авиасейлс](https://volkavtest.yonote.ru/share/638ff0ef-35e2-48a7-9a52-2bc0af61bbcf)
 
-### Библиотеки для установки
-- pyp install pytest
-- pip install selenium
-- pip install webdriver-manager
-- pip install requests
-- pip install allure
+### стек
 
+- Python 
+- pytest
+- selenium
+- requests
+- allure-pytest
+- webdriver-manager
+
+
+```
+
+### Установка и запуск
+
+1. Клонирование репозитория
+bash
+git clone https://github.com/dryniavolk/pytest_ua_api_template.git
+cd pytest_ua_api_template
+
+2. Установка зависимостей
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Запуск тестов
+bash
+#### Все тесты
+pytest
+
+#### Только UI-тесты
+pytest -m ui
+
+#### Только API-тесты
+pytest -m api
+
+#### С подробным выводом
+pytest -v -s
+
+#### запуск тестов и сразу отчета allure фаилом run_tests.bat
+.\run_tests.bat (ввести в консоли в папке пректа)
+
+
+
+создание отчёта Allure:
+
+```bash
+pytest --alluredir=allure-results
+allure serve allure-results
+```
