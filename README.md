@@ -5,6 +5,7 @@
 ### Шаги
 1. Склонировать проект 'https://github.com/dryniavolk/pytest_ua_api_template.git'
 2. Установить зависимости
+# pip install -r requirements.txt
 3. Запуск тестов
 # API + UI тесты
 pytest tests/ -v
