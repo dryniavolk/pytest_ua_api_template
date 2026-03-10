@@ -5,13 +5,19 @@
 ### Шаги
 1. Склонировать проект 'https://github.com/dryniavolk/pytest_ua_api_template.git'
 2. Установить зависимости
-3. Запустить тесты 'pytest'
+3. Запуск тестов
+# API + UI тесты
+pytest tests/ -v
+
+# С генерацией Allure отчёта
+pytest tests/ -v --alluredir=allure-results
+allure serve allure-results
+или сразу .\run_tests.bat он сформирует отчёт в allure-results
 
 ### Стек:
 - pytest
 - selenium
 - requests
-- _sqlalchemy_
 - allure
 - config
 
@@ -19,24 +25,28 @@
 - ./test - тесты
 - ./pages - описание страниц
 - ./api - хелперы для работы с API
-- ./db - хелперы для работы с БД
 
-pytest_api_ui_template/
-├── api/                          
-│   ├── aviasales_api.py          
-│   ├── cookie_manager.py         
-│   └── http_client.py            
-├── pages/                        
-│   ├── mainPage.py              
-│   └── resultPage.py             
-│
-├── test/                        
-│   ├── test_api.py               
-│   └── test_ui.py                
-├── conftest.py                   
-├── pytest.ini                     
-├── requirements.txt               
-└── README.md   
+pytest_ua_api_template/
+├── api/
+│   ├── __init__.py
+│   ├── aviasales_api.py        # API клиент Aviasales
+│   ├── cookie_manager.py       # Менеджер cookies (Selenium + cache)
+│   └── http_client.py          # HTTP клиент с заголовками
+├── pages/
+│   ├── __init__.py
+│   ├── mainPage.py             # Page Object: главная страница
+│   └── resultPage.py           # Page Object: страница результатов
+├── tests/
+│   ├── __init__.py
+│   ├── api_test.py             # 5 API тестов
+│   └── ui_test.py              # 5 UI тестов
+├── postman/
+│   └── Aviasales_10_API_Tests.json  # Postman коллекция
+├── conftest.py                 # Pytest фикстуры (WebDriver)
+├── pytest.ini                  # Настройки pytest
+├── requirements.txt            # Зависимости
+├── README.md                   # Документация
+└── allure-results/             # Результаты Allure (gitignored)
 
 ### Стек:
 - pytest
@@ -46,6 +56,7 @@ pytest_api_ui_template/
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
+- [финальная работа по ручному тестированию Aviasales](https://volkavtest.yonote.ru/share/638ff0ef-35e2-48a7-9a52-2bc0af61bbcf)
 
 ### Библиотеки (!)
 - pyp install pytest
