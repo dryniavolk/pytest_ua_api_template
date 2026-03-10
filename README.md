@@ -11,7 +11,9 @@ pytest tests/ -v
 
 # С генерацией Allure отчёта
 pytest tests/ -v --alluredir=allure-results
+
 allure serve allure-results
+
 или сразу .\run_tests.bat он сформирует отчёт в allure-results
 
 ### Стек:
