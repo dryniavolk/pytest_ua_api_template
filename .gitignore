@@ -67,3 +67,11 @@ aviasales_cookies.json
 Thumbs.db
 desktop.ini
 $RECYCLE.BIN/
+# --- WebDriver binaries (критично!) ---
+chromedriver.exe
+geckodriver.exe
+msedgedriver.exe
+chromedriver
+geckodriver
+drivers/
+.driver_cache/

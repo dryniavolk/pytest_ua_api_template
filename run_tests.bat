@@ -3,7 +3,7 @@ chcp 65001 >nul
 setlocal
 
 rem ==== НАСТРОЙКА ПУТЕЙ ====
-set results=.\results
+set results=.\allure-results
 set rep_history=.\final-report\history
 set report=.\final-report
 
@@ -14,11 +14,11 @@ echo ==========================================
 rem ==== 1. ОЧИСТКА ====
 echo [1/5] Очистка старых результатов...
 if exist %results% rmdir /s /q %results% 2>nul
-echo   ✓ Папка results очищена
+echo   ✓ Папка allure-results очищена
 
 rem ==== 2. ТЕСТЫ ====
 echo [2/5] Запуск тестов (pytest)...
-pytest tests/ --alluredir=%results% -v -s
+pytest test/ --alluredir=%results% -v -s
 if errorlevel 1 echo   ⚠ ВНИМАНИЕ: Некоторые тесты упали!
 
 rem ==== 3. ИСТОРИЯ ====
@@ -50,7 +50,6 @@ echo   http://localhost:56789 (порт может отличаться)
 echo   ---------------------------------------------------
 
 rem Используем 'call', чтобы скрипт ждал завершения команды allure open
-rem Команда 'start' запускает новое окно, которое не убьет основной процесс
 start "" allure open %report%
 
 echo.

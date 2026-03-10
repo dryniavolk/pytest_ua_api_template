@@ -50,8 +50,6 @@ pytest_ua_api_template/
 - webdriver-manager
 
 
-```
-
 ### Установка и запуск
 
 1. Клонирование репозитория
