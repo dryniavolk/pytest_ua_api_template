@@ -27,8 +27,7 @@ pytest_ua_api_template/
 │   ├── __init__.py
 │   ├── api_test.py               # 5 API тестов
 │   └── ui_test.py                # 5 UI тестов
-├── postman/
-│   └── Aviasales_10_API_Tests.json
+├── run_tests.bat                 # Скрипт запуска тестов   
 ├── conftest.py                   # Pytest фикстуры (WebDriver)
 ├── pytest.ini                    # Настройки pytest
 ├── requirements.txt              # Зависимости
