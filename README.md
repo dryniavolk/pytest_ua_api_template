@@ -40,24 +40,24 @@ allure serve allure-results
 pytest_ua_api_template/
 ├── api/
 │   ├── __init__.py
-│   ├── aviasales_api.py        # API клиент Aviasales
-│   ├── cookie_manager.py       # Менеджер cookies (Selenium + cache)
-│   └── http_client.py          # HTTP клиент с заголовками
+│   ├── aviasales_api.py          # API клиент Aviasales
+│   ├── cookie_manager.py          # Менеджер cookies (Selenium + cache)
+│   └── http_client.py             # HTTP клиент с заголовками
 ├── pages/
 │   ├── __init__.py
-│   ├── mainPage.py             # Page Object: главная страница
-│   └── resultPage.py           # Page Object: страница результатов
+│   ├── mainPage.py                # Page Object: главная страница
+│   └── resultPage.py              # Page Object: страница результатов
 ├── tests/
 │   ├── __init__.py
-│   ├── api_test.py             # 5 API тестов
-│   └── ui_test.py              # 5 UI тестов
+│   ├── api_test.py                # 5 API тестов
+│   └── ui_test.py                 # 5 UI тестов
 ├── postman/
-│   └── Aviasales_10_API_Tests.json  # Postman коллекция
-├── conftest.py                 # Pytest фикстуры (WebDriver)
-├── pytest.ini                  # Настройки pytest
-├── requirements.txt            # Зависимости
-├── README.md                   # Документация
-└── allure-results/             # Результаты Allure (gitignored)
+│   └── Aviasales_10_API_Tests.json # Postman коллекция
+├── conftest.py                     # Pytest фикстуры (WebDriver)
+├── pytest.ini                      # Настройки pytest
+├── requirements.txt                # Зависимости
+├── README.md                       # Документация
+└── allure-results/                 # Результаты Allure (gitignored)
 
 ### Стек:
 - pytest
