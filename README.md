@@ -8,7 +8,15 @@
 # pip install -r requirements.txt
 3. Запуск тестов
 # API + UI тесты
-pytest tests/ -v
+bash
+Все тесты
+pytest
+
+Только UI-тесты
+pytest -m ui
+
+Только API-тесты
+pytest -m api   
 
 # С генерацией Allure отчёта
 pytest tests/ -v --alluredir=allure-results
