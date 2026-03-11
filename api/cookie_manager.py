@@ -11,11 +11,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
+from config import AVIASALES_MAIN_URL, COOKIE_FILE, COOKIE_EXPIRE_MINUTES
+
 
 class CookieManager:
-    """Кэширование cookies для доступа к Aviasales"""
+    """Кэширование cookies для доступа к Aviasales."""
 
-    def __init__(self, cookie_file: str = "aviasales_cookies.json") -> None:
+    def __init__(self, cookie_file: str = COOKIE_FILE) -> None:
         self.cookie_file = cookie_file
 
     def get_cookies(self) -> dict[str, str]:
@@ -36,14 +38,16 @@ class CookieManager:
             if datetime.now() < expires:
                 return data["cookies"]
         except (json.JSONDecodeError, KeyError, ValueError):
-            # Если файл повреждён — игнорируем и получаем свежие
             pass
         return None
 
     def _save_cookies(self, cookies: dict[str, str]) -> None:
         data = {
             "cookies": cookies,
-            "expires": (datetime.now() + timedelta(minutes=30)).isoformat(),
+            "expires": (
+                datetime.now() + 
+                timedelta(minutes=COOKIE_EXPIRE_MINUTES)
+            ).isoformat(),
         }
         with open(self.cookie_file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -54,11 +58,11 @@ class CookieManager:
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-blink-features=AutomationControlled")
         driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()), 
+            service=Service(ChromeDriverManager().install()),
             options=options
         )
         try:
-            driver.get("https://www.aviasales.ru")
+            driver.get(AVIASALES_MAIN_URL)
             wait = WebDriverWait(driver, 10)
             wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
             cookies: dict[str, str] = {}

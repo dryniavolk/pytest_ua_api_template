@@ -3,6 +3,11 @@ from typing import Any, Optional
 
 from api.cookie_manager import CookieManager
 from api.http_client import AviasalesHttpClient
+from config import (
+    AVIASALES_API_URL,
+    SEARCH_START_ENDPOINT,
+    SEARCH_RESULTS_ENDPOINT,
+)
 
 
 class AviasalesAPI:
@@ -11,7 +16,7 @@ class AviasalesAPI:
     def __init__(self) -> None:
         cookie_manager = CookieManager()
         self._http_client = AviasalesHttpClient(cookie_manager)
-        self.base_url = "https://tickets-api.aviasales.ru"
+        self.base_url = AVIASALES_API_URL
         self.search_uid: Optional[str] = None
         self.last_request_id: Optional[str] = None
 
@@ -67,7 +72,7 @@ class AviasalesAPI:
         }
         response = self._make_request(
             "post",
-            "/search/v2/start",
+            SEARCH_START_ENDPOINT,
             json=payload
         )
         if response.status_code == 200:
@@ -107,7 +112,7 @@ class AviasalesAPI:
         }
         response = self._make_request(
             "post",
-            "/search/v2/start",
+            SEARCH_START_ENDPOINT,
             json=payload
         )
         if response.status_code == 200:
@@ -139,7 +144,7 @@ class AviasalesAPI:
         for _ in range(5):
             response = self._make_request(
                 "post",
-                "/search/v3.2/results",
+                SEARCH_RESULTS_ENDPOINT,
                 json=payload
             )
             if response.status_code == 200:
@@ -152,4 +157,3 @@ class AviasalesAPI:
             else:
                 return None
         return None
-        
