@@ -11,19 +11,29 @@ class ResultPage:
     RESULTS_LIST = (By.XPATH, '//div[@data-test-id="search-results-items-list"]')
     FIRST_TICKET_PRICE = (By.XPATH, '(//div[@data-test-id="price"])[1]')
     ANY_TICKET_PRICE = (By.XPATH, '//div[@data-test-id="price"]')
-    NO_RESULTS_MESSAGE = (By.XPATH, '//*[contains(., "Ничего не найдено") or contains(., "Ничего не нашлось")]')
+    NO_RESULTS_MESSAGE = (
+        By.XPATH,
+        '//*[contains(., "Ничего не найдено") or contains(., "Ничего не нашлось")]',
+    )
     FAVORITE_BUTTON = (By.XPATH, "(//button[@data-test-id='button'])[1]")
-    LOGIN_FORM_TITLE = (By.XPATH, "//button[@data-test-id='button']//div[@data-test-id='text' and contains(normalize-space(.), 'Войти в')]")
+    LOGIN_FORM_TITLE = (
+        By.XPATH,
+        "//button[@data-test-id='button']//div[@data-test-id='text' and contains(normalize-space(.), 'Войти в')]",
+    )
 
     def __init__(self, driver: WebDriver) -> None:
         self.driver = driver
         self.wait: WebDriverWait = WebDriverWait(driver, 30)
 
     def wait_for_prices_loaded(self, timeout: int = 45) -> None:
-        WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(self.ANY_TICKET_PRICE))
+        WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located(self.ANY_TICKET_PRICE)
+        )
 
     def get_ticket_price(self) -> str:
-        price_element = self.wait.until(EC.visibility_of_element_located(self.FIRST_TICKET_PRICE))
+        price_element = self.wait.until(
+            EC.visibility_of_element_located(self.FIRST_TICKET_PRICE)
+        )
         return price_element.text.strip()
 
     def is_price_valid(self, price_text: str) -> bool:
@@ -34,7 +44,9 @@ class ResultPage:
     def has_no_results(self, timeout: int = 20) -> bool:
         short_wait = WebDriverWait(self.driver, timeout)
         try:
-            msg = short_wait.until(EC.visibility_of_element_located(self.NO_RESULTS_MESSAGE))
+            msg = short_wait.until(
+                EC.visibility_of_element_located(self.NO_RESULTS_MESSAGE)
+            )
             if msg and msg.is_displayed():
                 return True
         except Exception:
@@ -54,7 +66,9 @@ class ResultPage:
 
     def is_login_form_displayed(self) -> bool:
         try:
-            return self.wait.until(EC.visibility_of_element_located(self.LOGIN_FORM_TITLE)).is_displayed()
+            return self.wait.until(
+                EC.visibility_of_element_located(self.LOGIN_FORM_TITLE)
+            ).is_displayed()
         except Exception:
             return False
 

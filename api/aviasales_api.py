@@ -20,12 +20,7 @@ class AviasalesAPI:
         self.search_uid: Optional[str] = None
         self.last_request_id: Optional[str] = None
 
-    def _make_request(
-        self,
-        method: str,
-        endpoint: str,
-        **kwargs: Any
-    ) -> Any:
+    def _make_request(self, method: str, endpoint: str, **kwargs: Any) -> Any:
         url = f"{self.base_url}{endpoint}"
         if self.last_request_id:
             headers = kwargs.setdefault("headers", {})
@@ -70,11 +65,7 @@ class AviasalesAPI:
             "market_code": "ru",
             "currency_code": "rub",
         }
-        response = self._make_request(
-            "post",
-            SEARCH_START_ENDPOINT,
-            json=payload
-        )
+        response = self._make_request("post", SEARCH_START_ENDPOINT, json=payload)
         if response.status_code == 200:
             data = response.json()
             self.search_uid = data.get("search_id")
@@ -110,29 +101,22 @@ class AviasalesAPI:
             "market_code": "ru",
             "currency_code": "rub",
         }
-        response = self._make_request(
-            "post",
-            SEARCH_START_ENDPOINT,
-            json=payload
-        )
+        response = self._make_request("post", SEARCH_START_ENDPOINT, json=payload)
         if response.status_code == 200:
             data = response.json()
             self.search_uid = data.get("search_id")
             return self.search_uid
         return None
 
-    def search_result(
-        self,
-        search_uid: Optional[str] = None
-    ) -> Optional[list]:
+    def search_result(self, search_uid: Optional[str] = None) -> Optional[list]:
         if search_uid is not None:
             self.search_uid = search_uid
         if not self.search_uid:
             return None
-        
+
         current_timestamp = int(time.time())
         time.sleep(2)
-        
+
         payload = {
             "limit": 1,
             "price_per_person": False,
@@ -140,13 +124,9 @@ class AviasalesAPI:
             "search_id": self.search_uid,
             "last_update_timestamp": current_timestamp,
         }
-        
+
         for _ in range(5):
-            response = self._make_request(
-                "post",
-                SEARCH_RESULTS_ENDPOINT,
-                json=payload
-            )
+            response = self._make_request("post", SEARCH_RESULTS_ENDPOINT, json=payload)
             if response.status_code == 200:
                 data = response.json()
                 if data and len(data) > 0 and "tickets" in data[0]:

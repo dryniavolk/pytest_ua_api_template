@@ -19,10 +19,10 @@ def test_ui_roundtrip_ticket_search(driver: WebDriver) -> None:
         home_page.navigate()
 
     with allure.step("Заполнить параметры: Ижевск → Москва, даты"):
-        home_page.fill_departure_city('Ижевск')
-        home_page.fill_arrival_city('Москва')
-        home_page.select_departure_date('19.03.2026')
-        home_page.select_return_date('20.03.2026')
+        home_page.fill_departure_city("Ижевск")
+        home_page.fill_arrival_city("Москва")
+        home_page.select_departure_date("19.03.2026")
+        home_page.select_return_date("20.03.2026")
 
     with allure.step("Запустить поиск"):
         home_page.click_search()
@@ -31,7 +31,9 @@ def test_ui_roundtrip_ticket_search(driver: WebDriver) -> None:
         results_page.wait_for_prices_loaded(timeout=45)
         ticket_price = results_page.get_ticket_price()
         assert ticket_price, "Цена билета не отображается"
-        assert results_page.is_price_valid(ticket_price), f"Некорректный формат цены: '{ticket_price}'"
+        assert results_page.is_price_valid(
+            ticket_price
+        ), f"Некорректный формат цены: '{ticket_price}'"
 
 
 @allure.feature("Авиасейлс: поиск и бронирование авиабилетов")
@@ -46,9 +48,9 @@ def test_ui_oneway_ticket_search(driver: WebDriver) -> None:
         home_page.navigate()
 
     with allure.step("Ввести город и дату вылета"):
-        home_page.fill_departure_city('Ижевск')
-        home_page.fill_arrival_city('Москва')
-        home_page.select_departure_date('19.03.2026')
+        home_page.fill_departure_city("Ижевск")
+        home_page.fill_arrival_city("Москва")
+        home_page.select_departure_date("19.03.2026")
 
     with allure.step("Запустить поиск"):
         home_page.click_search()
@@ -57,7 +59,9 @@ def test_ui_oneway_ticket_search(driver: WebDriver) -> None:
         results_page.wait_for_prices_loaded(timeout=40)
         ticket_price = results_page.get_ticket_price()
         assert ticket_price, "Цена не найдена"
-        assert results_page.is_price_valid(ticket_price), f"Цена не прошла валидацию: '{ticket_price}'"
+        assert results_page.is_price_valid(
+            ticket_price
+        ), f"Цена не прошла валидацию: '{ticket_price}'"
 
 
 @allure.feature("Авиасейлс: поиск и бронирование авиабилетов")
@@ -72,16 +76,18 @@ def test_ui_invalid_same_city_search(driver: WebDriver) -> None:
         home_page.navigate()
 
     with allure.step("Указать один и тот же город в оба поля"):
-        home_page.fill_departure_city('Ижевск')
-        home_page.fill_arrival_city('Ижевск')
-        home_page.select_departure_date('19.03.2026')
-        home_page.select_return_date('20.03.2026')
+        home_page.fill_departure_city("Ижевск")
+        home_page.fill_arrival_city("Ижевск")
+        home_page.select_departure_date("19.03.2026")
+        home_page.select_return_date("20.03.2026")
 
     with allure.step("Выполнить поиск"):
         home_page.click_search()
 
     with allure.step("Убедиться, что результаты отсутствуют"):
-        assert results_page.has_no_results(), "Ожидалось сообщение об отсутствии билетов"
+        assert (
+            results_page.has_no_results()
+        ), "Ожидалось сообщение об отсутствии билетов"
 
 
 @allure.feature("Авиасейлс: поиск и бронирование авиабилетов")
@@ -94,10 +100,10 @@ def test_ui_favourite_requires_auth(driver: WebDriver) -> None:
 
     with allure.step("Выполнить поиск билета"):
         home_page.navigate()
-        home_page.fill_departure_city('Ижевск')
-        home_page.fill_arrival_city('Москва')
-        home_page.select_departure_date('19.03.2026')
-        home_page.select_return_date('20.03.2026')
+        home_page.fill_departure_city("Ижевск")
+        home_page.fill_arrival_city("Москва")
+        home_page.select_departure_date("19.03.2026")
+        home_page.select_return_date("20.03.2026")
         home_page.click_search()
 
     with allure.step("Нажать 'В избранное'"):
@@ -121,10 +127,10 @@ def test_ui_search_with_infant_passenger(driver: WebDriver) -> None:
         home_page.navigate()
 
     with allure.step("Заполнить маршрут и даты"):
-        home_page.fill_departure_city('Ижевск')
-        home_page.fill_arrival_city('Москва')
-        home_page.select_departure_date('19.03.2026')
-        home_page.select_return_date('20.03.2026')
+        home_page.fill_departure_city("Ижевск")
+        home_page.fill_arrival_city("Москва")
+        home_page.select_departure_date("19.03.2026")
+        home_page.select_return_date("20.03.2026")
 
     with allure.step("Добавить 1 ребенка и проверить значение"):
         infant_count = home_page.add_infant()

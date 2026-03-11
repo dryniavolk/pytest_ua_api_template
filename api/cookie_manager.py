@@ -45,8 +45,7 @@ class CookieManager:
         data = {
             "cookies": cookies,
             "expires": (
-                datetime.now() + 
-                timedelta(minutes=COOKIE_EXPIRE_MINUTES)
+                datetime.now() + timedelta(minutes=COOKIE_EXPIRE_MINUTES)
             ).isoformat(),
         }
         with open(self.cookie_file, "w", encoding="utf-8") as f:
@@ -58,8 +57,7 @@ class CookieManager:
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-blink-features=AutomationControlled")
         driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
-            options=options
+            service=Service(ChromeDriverManager().install()), options=options
         )
         try:
             driver.get(AVIASALES_MAIN_URL)

@@ -5,6 +5,7 @@ from config import AVIASALES_MAIN_URL
 
 class CookieProvider(Protocol):
     """Шаблон для работы с cookies."""
+
     def get_cookies(self) -> dict[str, str]: ...
 
 
@@ -14,19 +15,13 @@ class AviasalesHttpClient:
     DEFAULT_ORIGIN = AVIASALES_MAIN_URL
     DEFAULT_REFERER = f"{AVIASALES_MAIN_URL}/"
     DEFAULT_USER_AGENT = (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " "AppleWebKit/537.36"
     )
 
     def __init__(self, cookie_provider: CookieProvider) -> None:
         self._cookie_provider = cookie_provider
 
-    def request(
-        self,
-        method: str,
-        url: str,
-        **kwargs: Any
-    ) -> requests.Response:
+    def request(self, method: str, url: str, **kwargs: Any) -> requests.Response:
         cookies = self._cookie_provider.get_cookies()
         cookie_header = "; ".join(f"{k}={v}" for k, v in cookies.items())
         headers = {

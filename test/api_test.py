@@ -14,11 +14,11 @@ def test_api_roundtrip_flight_search() -> None:
 
     with allure.step("Запустить поиск билетов туда-обратно"):
         search_uid = api_client.search_start(
-            origin='IJK',
-            destination='MOW',
-            date_from='2026-11-08',
-            date_to='2026-11-09',
-            adults=1
+            origin="IJK",
+            destination="MOW",
+            date_from="2026-11-08",
+            date_to="2026-11-09",
+            adults=1,
         )
         assert search_uid is not None
 
@@ -36,10 +36,7 @@ def test_api_oneway_flight_search() -> None:
 
     with allure.step("Запустить поиск в один конец"):
         search_uid = api_client.search_one_way(
-            origin='IJK',
-            destination='MOW',
-            date='2026-11-08',
-            adults=1
+            origin="IJK", destination="MOW", date="2026-11-08", adults=1
         )
         assert search_uid is not None
 
@@ -57,11 +54,11 @@ def test_api_extended_date_range_search() -> None:
 
     with allure.step("Запрос с большим разрывом между датами"):
         search_uid = api_client.search_start(
-            origin='IJK',
-            destination='MOW',
-            date_from='2026-11-08',
-            date_to='2027-02-08',
-            adults=1
+            origin="IJK",
+            destination="MOW",
+            date_from="2026-11-08",
+            date_to="2027-02-08",
+            adults=1,
         )
         assert search_uid is not None
 
@@ -79,12 +76,12 @@ def test_api_search_with_infant_passenger() -> None:
 
     with allure.step("Запустить поиск с параметром infant=1"):
         search_uid = api_client.search_start(
-            origin='IJK',
-            destination='MOW',
-            date_from='2026-11-08',
-            date_to='2026-11-09',
+            origin="IJK",
+            destination="MOW",
+            date_from="2026-11-08",
+            date_to="2026-11-09",
             adults=1,
-            infants=1
+            infants=1,
         )
         assert search_uid is not None
 
@@ -102,10 +99,10 @@ def test_api_invalid_same_origin_destination() -> None:
 
     with allure.step("ЗапусК поиска с одинаковыми городами"):
         search_uid = api_client.search_start(
-            origin='IJK',
-            destination='IJK',
-            date_from='2026-11-08',
-            date_to='2026-11-09',
-            adults=1
+            origin="IJK",
+            destination="IJK",
+            date_from="2026-11-08",
+            date_to="2026-11-09",
+            adults=1,
         )
         assert search_uid is None

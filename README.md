@@ -29,7 +29,8 @@ pytest_ua_api_template/
 │   └── ui_test.py                # 5 UI тестов
 ├── run_tests.bat                 # Скрипт запуска тестов   
 ├── conftest.py                   # Pytest фикстуры (WebDriver)
-├── pytest.ini                    # Настройки pytest
+├── config.py
+── pytest.ini                    # Настройки pytest
 ├── requirements.txt              # Зависимости
 ├── README.md                     # Документация
 └── allure-results/               # Результаты Allure (gitignored)
