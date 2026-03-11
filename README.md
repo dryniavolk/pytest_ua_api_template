@@ -16,9 +16,9 @@
 pytest_ua_api_template/
 ├── api/
 │   ├── __init__.py
-│   ├── aviasales_api.py          # API клиент Aviasales
-│   ├── cookie_manager.py         # Менеджер cookies (Selenium + cache)
-│   └── http_client.py            # HTTP клиент с заголовками
+│   ├── aviasales_api.py          # API  клиент Aviasales
+│   ├── cookie_manager.py         # Менеджер cookies 
+│   └── http_client.py            # HTTP клиент 
 ├── pages/
 │   ├── __init__.py
 │   ├── mainPage.py               # Page Object: главная страница
@@ -33,27 +33,18 @@ pytest_ua_api_template/
 ├── requirements.txt              # Зависимости
 ├── README.md                     # Документация
 └── allure-results/               # Результаты Allure (gitignored)
-```
+└── allure-report/                # Результаты Allure в виде html (gitignored)
+```  
 
 ### Полезные ссылки
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
 - [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore)
 - Финальный проект по ручному тестированию[Авиасейлс](https://volkavtest.yonote.ru/share/638ff0ef-35e2-48a7-9a52-2bc0af61bbcf)
 
-### стек
-
-- Python 
-- pytest
-- selenium
-- requests
-- allure-pytest
-- webdriver-manager
-
-
 ### Установка и запуск
 
 1. Клонирование репозитория
-bash
+'''bash
 git clone https://github.com/dryniavolk/pytest_ua_api_template.git
 cd pytest_ua_api_template
 

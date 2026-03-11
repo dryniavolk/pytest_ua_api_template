@@ -6,7 +6,7 @@ from api.http_client import AviasalesHttpClient
 
 
 class AviasalesAPI:
-    """API- для поиска авиабилетов."""
+    """API-клиент для поиска авиабилетов."""
 
     def __init__(self) -> None:
         cookie_manager = CookieManager()
@@ -15,10 +15,16 @@ class AviasalesAPI:
         self.search_uid: Optional[str] = None
         self.last_request_id: Optional[str] = None
 
-    def _make_request(self, method: str, endpoint: str, **kwargs: Any) -> Any:
+    def _make_request(
+        self,
+        method: str,
+        endpoint: str,
+        **kwargs: Any
+    ) -> Any:
         url = f"{self.base_url}{endpoint}"
         if self.last_request_id:
-            kwargs.setdefault("headers", {})["X-Request-Id"] = self.last_request_id
+            headers = kwargs.setdefault("headers", {})
+            headers["X-Request-Id"] = self.last_request_id
         response = self._http_client.request(method, url, **kwargs)
         if "X-Request-Id" in response.headers:
             self.last_request_id = response.headers["X-Request-Id"]
@@ -37,17 +43,33 @@ class AviasalesAPI:
         payload = {
             "search_params": {
                 "directions": [
-                    {"origin": origin, "destination": destination, "date": date_from},
-                    {"origin": destination, "destination": origin, "date": date_to},
+                    {
+                        "origin": origin,
+                        "destination": destination,
+                        "date": date_from,
+                    },
+                    {
+                        "origin": destination,
+                        "destination": origin,
+                        "date": date_to,
+                    },
                 ],
-                "passengers": {"adults": adults, "children": children, "infants": infants},
+                "passengers": {
+                    "adults": adults,
+                    "children": children,
+                    "infants": infants,
+                },
                 "trip_class": "Y",
             },
             "marker": "direct",
             "market_code": "ru",
             "currency_code": "rub",
         }
-        response = self._make_request("post", "/search/v2/start", json=payload)
+        response = self._make_request(
+            "post",
+            "/search/v2/start",
+            json=payload
+        )
         if response.status_code == 200:
             data = response.json()
             self.search_uid = data.get("search_id")
@@ -65,28 +87,47 @@ class AviasalesAPI:
     ) -> Optional[str]:
         payload = {
             "search_params": {
-                "directions": [{"origin": origin, "destination": destination, "date": date}],
-                "passengers": {"adults": adults, "children": children, "infants": infants},
+                "directions": [
+                    {
+                        "origin": origin,
+                        "destination": destination,
+                        "date": date,
+                    }
+                ],
+                "passengers": {
+                    "adults": adults,
+                    "children": children,
+                    "infants": infants,
+                },
                 "trip_class": "Y",
             },
             "marker": "direct",
             "market_code": "ru",
             "currency_code": "rub",
         }
-        response = self._make_request("post", "/search/v2/start", json=payload)
+        response = self._make_request(
+            "post",
+            "/search/v2/start",
+            json=payload
+        )
         if response.status_code == 200:
             data = response.json()
             self.search_uid = data.get("search_id")
             return self.search_uid
         return None
 
-    def search_result(self, search_uid: Optional[str] = None) -> Optional[list]:
+    def search_result(
+        self,
+        search_uid: Optional[str] = None
+    ) -> Optional[list]:
         if search_uid is not None:
             self.search_uid = search_uid
         if not self.search_uid:
             return None
+        
         current_timestamp = int(time.time())
         time.sleep(2)
+        
         payload = {
             "limit": 1,
             "price_per_person": False,
@@ -94,8 +135,13 @@ class AviasalesAPI:
             "search_id": self.search_uid,
             "last_update_timestamp": current_timestamp,
         }
+        
         for _ in range(5):
-            response = self._make_request("post", "/search/v3.2/results", json=payload)
+            response = self._make_request(
+                "post",
+                "/search/v3.2/results",
+                json=payload
+            )
             if response.status_code == 200:
                 data = response.json()
                 if data and len(data) > 0 and "tickets" in data[0]:
@@ -106,3 +152,4 @@ class AviasalesAPI:
             else:
                 return None
         return None
+        
